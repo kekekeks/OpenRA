@@ -300,6 +300,7 @@ namespace OpenRA
 			{
 				HeadlessConfig.DoHeadlessConfig();
 				Game.CreateServer(new ServerSettings(Game.Settings.Server));
+				System.Threading.Thread.Sleep(System.Threading.Timeout.Infinite);
 			}
 			else
 			{
