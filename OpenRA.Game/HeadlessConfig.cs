@@ -19,6 +19,9 @@ namespace OpenRA
 		
 		public static void DoHeadlessConfig()
 		{
+			if(Game.Settings.Server.Map==null)
+				Game.Settings.Server.Map=Game.modData.AvailableMaps.Values
+					.Where(m => m.Selectable).First().Uid;
 			bool exit=false;
 			while(!exit)
 			{
