@@ -298,6 +298,7 @@ namespace OpenRA
 			viewport = new Viewport(new int2(Renderer.Resolution), Rectangle.Empty, Renderer);
 			if(headless)
 			{
+				HeadlessConfig.DoHeadlessConfig();
 				Game.CreateServer(new ServerSettings(Game.Settings.Server));
 			}
 			else
