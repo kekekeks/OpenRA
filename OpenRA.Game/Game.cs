@@ -302,7 +302,19 @@ namespace OpenRA
 				if(!arguments.ContainsFlag("headless-no-config"))
 					HeadlessConfig.DoHeadlessConfig();
 				Game.CreateServer(new ServerSettings(Game.Settings.Server));
-				System.Threading.Thread.Sleep(System.Threading.Timeout.Infinite);
+				while(true)
+				{
+					System.Threading.Thread.Sleep(100);
+					
+					//Accessing public field and List::Count is thread safe
+					if((server.GameStarted)&&(server.conns.Count<=1))
+					{
+						Console.WriteLine("Noone is playing, shutting down...");
+						server.Shutdown();
+						System.Environment.Exit(0);
+					}
+				}
+				
 			}
 			else
 			{
