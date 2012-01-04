@@ -236,7 +236,8 @@ namespace OpenRA
 		{
 			arguments=args;
 			Console.WriteLine("Platform is {0}", Platform.CurrentPlatform);
-
+			Platform.SupportDir=args.GetValue("SupportDir", Platform.SupportDir);
+				
 			AppDomain.CurrentDomain.AssemblyResolve += FileSystem.ResolveAssembly;
 
 			Settings = new Settings(Platform.SupportDir + "settings.yaml", args);
