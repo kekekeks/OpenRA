@@ -129,13 +129,13 @@ namespace OpenRA.Graphics
 		// which makes the window non-interactive in Windowed/Pseudofullscreen mode.
 		static Screen FixOSX() { return Screen.PrimaryScreen; }
 
-		internal static void Initialize( WindowMode windowMode, bool headless)
+		internal static void Initialize( WindowMode windowMode)
 		{
 			if (Platform.CurrentPlatform == PlatformType.OSX)
 				FixOSX();
 
 			var resolution = GetResolution( windowMode );
-			string renderer=headless?"Null":Game.Settings.Graphics.Renderer;
+			string renderer=Game.arguments.ContainsFlag("headless")?"Null":Game.Settings.Graphics.Renderer;
 			var rendererPath = Path.GetFullPath( "OpenRA.Renderer.{0}.dll".F(renderer) );
 			device = CreateDevice( Assembly.LoadFile( rendererPath ), resolution.Width, resolution.Height, windowMode );
 		}

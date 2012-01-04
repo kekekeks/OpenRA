@@ -31,7 +31,7 @@ namespace OpenRA
 
 		public static ModData modData;
 		static WorldRenderer worldRenderer;
-
+		public static Arguments arguments;
 		public static Viewport viewport;
 		public static Settings Settings;
 
@@ -234,6 +234,7 @@ namespace OpenRA
 
 		internal static void Initialize(Arguments args)
 		{
+			arguments=args;
 			Console.WriteLine("Platform is {0}", Platform.CurrentPlatform);
 
 			AppDomain.CurrentDomain.AssemblyResolve += FileSystem.ResolveAssembly;
@@ -247,8 +248,7 @@ namespace OpenRA
 			Log.AddChannel("sync", "syncreport.log");
 
 			FileSystem.Mount("."); // Needed to access shaders
-			bool headless=args.ContainsFlag("headless");
-			Renderer.Initialize( Game.Settings.Graphics.Mode, headless);
+			Renderer.Initialize( Game.Settings.Graphics.Mode);
 			Renderer = new Renderer();
 
 			Console.WriteLine("Available mods:");
@@ -256,10 +256,10 @@ namespace OpenRA
 				Console.WriteLine("\t{0}: {1} ({2})", mod.Key, mod.Value.Title, mod.Value.Version);
 
 			Sound.Create();
-			InitializeWithMods(Settings.Game.Mods, headless);
+			InitializeWithMods(Settings.Game.Mods);
 		}
 
-		public static void InitializeWithMods(string[] mods, bool headless=false)
+		public static void InitializeWithMods(string[] mods)
 		{
 			// Clear static state if we have switched mods
 			LobbyInfoChanged = () => {};
@@ -296,9 +296,10 @@ namespace OpenRA
 
 			JoinLocal();
 			viewport = new Viewport(new int2(Renderer.Resolution), Rectangle.Empty, Renderer);
-			if(headless)
+			if(arguments.ContainsFlag("headless"))
 			{
-				HeadlessConfig.DoHeadlessConfig();
+				if(!arguments.ContainsFlag("headless-no-config"))
+					HeadlessConfig.DoHeadlessConfig();
 				Game.CreateServer(new ServerSettings(Game.Settings.Server));
 				System.Threading.Thread.Sleep(System.Threading.Timeout.Infinite);
 			}
