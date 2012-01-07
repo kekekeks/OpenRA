@@ -80,7 +80,7 @@ namespace OpenRA.Net
 				Admin=conn;
 				server.SendChatTo(conn, "Available commands:\n" +
 					"/start - start game\n" +
-					"/list - list of maps\n" +
+					"/maps - list of maps\n" +
 					"/map number - change map");
 			}
 		}
