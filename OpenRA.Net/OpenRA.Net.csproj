@@ -37,6 +37,7 @@
     <Compile Include="Server.cs" />
     <Compile Include="CommonLobby.cs" />
     <Compile Include="ServerCallQueue.cs" />
+    <Compile Include="GameLobby.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
