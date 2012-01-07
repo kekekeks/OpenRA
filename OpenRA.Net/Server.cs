@@ -20,9 +20,16 @@ namespace OpenRA.Net
 				conn.PlayerIndex=ChooseFreePlayerIndex();
 				client.Index=conn.PlayerIndex;
 				client.Slot=lobbyInfo.FirstEmptySlot();
-				lobbyInfo.Clients.Add(client);
 				conns.Add(conn);
+				
+				if (client.Slot != null)
+					SyncClientToPlayerReference(client, Map.Players[client.Slot]);
+				lobbyInfo.Clients.Add(client);
+				foreach (var t in ServerTraits.WithInterface<IClientJoined>())
+					t.ClientJoined(this, newConn);
+
 				SyncLobbyInfo();
+				SendChat(newConn, "has joined the game.");
 				
 			});
 		}
