@@ -12,12 +12,13 @@ namespace OpenRA.Net
 		{
 			if(message=="/list")
 			{
-				server.SendChatTo(conn, "Available games:\n"+string.Join("\n", _servers.Values));
+				server.SendChatTo(conn, "Available games:\n"+string.Join("\n", _servers.Keys));
+				return true;
 			}	
 			var pair=message.Split(new char[]{' '},2);
 			if(pair.Length!=2)
 				return false;
-			if((pair[0]=="/create")||pair[0]=="join")
+			if((pair[0]=="/create")||pair[0]=="/join")
 			{
 				GameServer gs;
 				if(_servers.ContainsKey(pair[1]))
@@ -31,7 +32,7 @@ namespace OpenRA.Net
 				}
 				else
 				{
-					if(pair[0]=="join")
+					if(pair[0]=="/join")
 					{
 						server.SendChatTo(conn, "Not found");
 						return true;
