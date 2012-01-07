@@ -16,8 +16,6 @@ namespace OpenRA.Net
 		{
 			CallQueue.Enqueue(delegate(Server.Server server) 
 			{
-				conn.PlayerIndex=ChooseFreePlayerIndex();
-				client.Index=conn.PlayerIndex;
 				client.Slot=lobbyInfo.FirstEmptySlot();
 				conns.Add(conn);
 				
