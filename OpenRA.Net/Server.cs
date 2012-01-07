@@ -8,14 +8,13 @@ namespace OpenRA.Net
 	public class GameServer:OpenRA.Server.Server
 	{
 		public ServerCallQueue CallQueue {get; private set;}
-		
-		
 
+	
 		
 		
 		public void AdoptConnection(OpenRA.Server.Connection conn, Network.Session.Client client)
 		{
-			CallQueue.Enqueue(_ =>
+			CallQueue.Enqueue(delegate(Server.Server server) 
 			{
 				conn.PlayerIndex=ChooseFreePlayerIndex();
 				client.Index=conn.PlayerIndex;
@@ -25,12 +24,12 @@ namespace OpenRA.Net
 				if (client.Slot != null)
 					SyncClientToPlayerReference(client, Map.Players[client.Slot]);
 				lobbyInfo.Clients.Add(client);
-				foreach (var t in ServerTraits.WithInterface<IClientJoined>())
-					t.ClientJoined(this, newConn);
-
-				SyncLobbyInfo();
-				SendChat(newConn, "has joined the game.");
+				foreach (var t in ServerTraits.WithInterface<Server.IClientJoined>())
+					t.ClientJoined(this, conn);
 				
+				SyncLobbyInfo();
+				SendChat(conn, "has joined the game.");
+					
 			});
 		}
 		public GameServer():this(new ServerCallQueue(1))
