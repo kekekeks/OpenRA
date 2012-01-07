@@ -1,6 +1,6 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 10.00
-# Visual Studio 2008
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenRA.FileFormats", "OpenRA.FileFormats\OpenRA.FileFormats.csproj", "{BDAEAB25-991E-46A7-AF1E-4F0E03358DAA}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenRA.Game", "OpenRA.Game\OpenRA.Game.csproj", "{0DFB103F-2962-400F-8C6D-E2C28CCBA633}"
@@ -30,6 +30,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenRA.Renderer.Gl", "OpenRA.Renderer.Gl\OpenRA.Renderer.Gl.csproj", "{E9C01A96-C3E2-4772-825B-A740AC513D31}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenRA.Renderer.SdlCommon", "OpenRA.Renderer.SdlCommon\OpenRA.Renderer.SdlCommon.csproj", "{52FD9F0B-B209-4ED7-8A32-AC8033363263}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenRA.Net", "OpenRA.Net\OpenRA.Net.csproj", "{F7C780DA-70A5-44D9-91A1-37D83ADEF6D9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -62,14 +64,6 @@ Global
 		{0DFB103F-2962-400F-8C6D-E2C28CCBA633}.Release|Any CPU.ActiveCfg = Release|x86
 		{0DFB103F-2962-400F-8C6D-E2C28CCBA633}.Release|Mixed Platforms.ActiveCfg = Release|x86
 		{0DFB103F-2962-400F-8C6D-E2C28CCBA633}.Release|Mixed Platforms.Build.0 = Release|x86
-		{230F65CE-A6DE-4235-8B38-13A3D606C7F7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{230F65CE-A6DE-4235-8B38-13A3D606C7F7}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{230F65CE-A6DE-4235-8B38-13A3D606C7F7}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
-		{230F65CE-A6DE-4235-8B38-13A3D606C7F7}.Debug|Mixed Platforms.Build.0 = Debug|x86
-		{230F65CE-A6DE-4235-8B38-13A3D606C7F7}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{230F65CE-A6DE-4235-8B38-13A3D606C7F7}.Release|Any CPU.Build.0 = Release|Any CPU
-		{230F65CE-A6DE-4235-8B38-13A3D606C7F7}.Release|Mixed Platforms.ActiveCfg = Release|x86
-		{230F65CE-A6DE-4235-8B38-13A3D606C7F7}.Release|Mixed Platforms.Build.0 = Release|x86
 		{2881135D-4D62-493E-8F83-5EEE92CCC6BE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{2881135D-4D62-493E-8F83-5EEE92CCC6BE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2881135D-4D62-493E-8F83-5EEE92CCC6BE}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
@@ -134,6 +128,14 @@ Global
 		{F33337BE-CB69-4B24-850F-07D23E408DDF}.Release|Any CPU.Build.0 = Release|Any CPU
 		{F33337BE-CB69-4B24-850F-07D23E408DDF}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{F33337BE-CB69-4B24-850F-07D23E408DDF}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{F7C780DA-70A5-44D9-91A1-37D83ADEF6D9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F7C780DA-70A5-44D9-91A1-37D83ADEF6D9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F7C780DA-70A5-44D9-91A1-37D83ADEF6D9}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{F7C780DA-70A5-44D9-91A1-37D83ADEF6D9}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{F7C780DA-70A5-44D9-91A1-37D83ADEF6D9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F7C780DA-70A5-44D9-91A1-37D83ADEF6D9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F7C780DA-70A5-44D9-91A1-37D83ADEF6D9}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{F7C780DA-70A5-44D9-91A1-37D83ADEF6D9}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{F9FA4D9F-2302-470A-8A07-6E37F488C124}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{F9FA4D9F-2302-470A-8A07-6E37F488C124}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F9FA4D9F-2302-470A-8A07-6E37F488C124}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
@@ -142,9 +144,17 @@ Global
 		{F9FA4D9F-2302-470A-8A07-6E37F488C124}.Release|Any CPU.Build.0 = Release|Any CPU
 		{F9FA4D9F-2302-470A-8A07-6E37F488C124}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{F9FA4D9F-2302-470A-8A07-6E37F488C124}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{230F65CE-A6DE-4235-8B38-13A3D606C7F7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{230F65CE-A6DE-4235-8B38-13A3D606C7F7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{230F65CE-A6DE-4235-8B38-13A3D606C7F7}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
+		{230F65CE-A6DE-4235-8B38-13A3D606C7F7}.Debug|Mixed Platforms.Build.0 = Debug|x86
+		{230F65CE-A6DE-4235-8B38-13A3D606C7F7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{230F65CE-A6DE-4235-8B38-13A3D606C7F7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{230F65CE-A6DE-4235-8B38-13A3D606C7F7}.Release|Mixed Platforms.ActiveCfg = Release|x86
+		{230F65CE-A6DE-4235-8B38-13A3D606C7F7}.Release|Mixed Platforms.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(MonoDevelopProperties) = preSolution
-		StartupItem = OpenRA.Game\OpenRA.Game.csproj
+		StartupItem = OpenRA.Net\OpenRA.Net.csproj
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

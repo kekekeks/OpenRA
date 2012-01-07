@@ -34,7 +34,7 @@ namespace OpenRA.Server
 		Dictionary<int, List<Connection>> inFlightFrames
 			= new Dictionary<int, List<Connection>>();
 
-		TypeDictionary ServerTraits = new TypeDictionary();
+		public TypeDictionary ServerTraits = new TypeDictionary();
 		public Session lobbyInfo;
 		public bool GameStarted = false;
 		public readonly IPAddress Ip;
@@ -48,13 +48,20 @@ namespace OpenRA.Server
 
 		volatile bool shutdown = false;
 		public void Shutdown() { shutdown = true; }
-
+		
 		public Server(IPEndPoint endpoint, string[] mods, ServerSettings settings, ModData modData)
+			: this(endpoint, mods, settings, modData, null, false)
+		{
+			
+		}
+		
+		public Server(IPEndPoint endpoint, string[] mods, ServerSettings settings,ModData modData, IEnumerable<ServerTrait> traits, bool noListen)
 		{
 			Log.AddChannel("server", "server.log");
 
 			listener = new TcpListener(endpoint);
-			listener.Start();
+			if(!noListen)
+				listener.Start();
 			var localEndpoint = (IPEndPoint)listener.LocalEndpoint;
 			Ip = localEndpoint.Address;
 			Port = localEndpoint.Port;
@@ -63,9 +70,11 @@ namespace OpenRA.Server
 			ModData = modData;
 
 			randomSeed = (int)DateTime.Now.ToBinary();
-
-			foreach (var trait in modData.Manifest.ServerTraits)
-				ServerTraits.Add( modData.ObjectCreator.CreateObject<ServerTrait>(trait) );
+			if(traits==null)
+				traits=from t in Game.modData.Manifest.ServerTraits
+					select modData.ObjectCreator.CreateObject<ServerTrait>(t);
+			foreach (var trait in traits)
+				ServerTraits.Add( trait);
 
 			lobbyInfo = new Session( mods );
 			lobbyInfo.GlobalSettings.RandomSeed = randomSeed;
@@ -329,10 +338,11 @@ namespace OpenRA.Server
 
 		void InterpretServerOrder(Connection conn, ServerOrder so)
 		{
+			bool handled = false;
 			switch (so.Name)
 			{
 				case "Command":
-					bool handled = false;
+					
 					foreach (var t in ServerTraits.WithInterface<IInterpretCommand>())
 						if ((handled = t.InterpretCommand(this, conn, GetClient(conn), so.Data)))
 							break;
@@ -351,7 +361,10 @@ namespace OpenRA.Server
 				case "TeamChat":
 					var fromClient = GetClient(conn);
 					var fromIndex = fromClient != null ? fromClient.Index : 0;
-
+				
+					foreach (var t in ServerTraits.WithInterface<IInterpretChat>())
+						if ((handled = t.InterpretChat(this, conn, fromClient, so.Data)))
+							break;
 					foreach (var c in conns.Except(conn).ToArray())
 						DispatchOrdersToClient(c, fromIndex, 0, so.Serialize());
 				break;

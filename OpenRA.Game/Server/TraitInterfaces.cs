@@ -20,6 +20,7 @@ namespace OpenRA.Server
 	public interface INotifyServerShutdown { void ServerShutdown(Server server); }
 	public interface IStartGame { void GameStarted(Server server); }
 	public interface IClientJoined { void ClientJoined(Server server, Connection conn); }
+	public interface IInterpretChat { bool InterpretChat(Server server, Connection conn, Session.Client client, string message); }
 	public interface ITick
 	{
 		void Tick(Server server);
