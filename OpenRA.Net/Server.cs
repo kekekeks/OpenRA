@@ -38,7 +38,7 @@ namespace OpenRA.Net
 		
 		GameServer(ServerCallQueue cq):base(new IPEndPoint(IPAddress.Parse("127.0.0.1"), 1000),new string[]{"ra"},
 			Game.Settings.Server, Game.modData, 
-			new Server.ServerTrait[]{cq, new Mods.RA.Server.LobbyCommands(), new GameLobby()} , true)
+			new Server.ServerTrait[]{cq, new GameLobby()} , true)
 		{
 			CallQueue=cq;
 		}

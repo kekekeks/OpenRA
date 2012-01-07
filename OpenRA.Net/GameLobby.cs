@@ -1,9 +1,10 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using OpenRA.Network;
 namespace OpenRA.Net
 {
-	public class GameLobby:Server.ServerTrait, Server.IInterpretChat, Server.IClientJoined
+	public class GameLobby:OpenRA.Mods.RA.Server.LobbyCommands, Server.IInterpretChat, Server.IClientJoined
 	{
 	
 		public Server.Connection Admin;
@@ -35,7 +36,7 @@ namespace OpenRA.Net
 						num--;
 						if((num<0)||(num>=_maps.Count))
 							return false;
-												server.lobbyInfo.GlobalSettings.Map = s;
+						server.lobbyInfo.GlobalSettings.Map = _maps[num].Uid;
 						var oldSlots = server.lobbyInfo.Slots.Keys.ToArray();
 						LoadMap(server);
 
@@ -55,7 +56,7 @@ namespace OpenRA.Net
 							c.State = Session.ClientState.NotReady;
 							c.Slot = i < slots.Length ? slots[i++] : null;
 							if (c.Slot != null)
-								S.SyncClientToPlayerReference(c, server.Map.Players[c.Slot]);
+								OpenRA.Server.Server.SyncClientToPlayerReference(c, server.Map.Players[c.Slot]);
 							else if (c.Bot != null)
 								server.lobbyInfo.Clients.Remove(c);
 						}
