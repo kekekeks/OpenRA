@@ -444,7 +444,7 @@ namespace OpenRA.Mods.RA.Server
 			};
 		}
 
-		static void LoadMap(S server)
+		public static void LoadMap(S server)
 		{
 			server.Map = new Map(server.ModData.AvailableMaps[server.lobbyInfo.GlobalSettings.Map].Path);
 			server.lobbyInfo.Slots = server.Map.Players

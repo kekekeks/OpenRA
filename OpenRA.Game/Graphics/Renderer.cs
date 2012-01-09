@@ -129,7 +129,7 @@ namespace OpenRA.Graphics
 		// which makes the window non-interactive in Windowed/Pseudofullscreen mode.
 		static Screen FixOSX() { return Screen.PrimaryScreen; }
 
-		internal static void Initialize( WindowMode windowMode )
+		public static void Initialize( WindowMode windowMode )
 		{
 			if (Platform.CurrentPlatform == PlatformType.OSX)
 				FixOSX();

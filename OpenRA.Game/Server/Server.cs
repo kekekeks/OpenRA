@@ -34,7 +34,7 @@ namespace OpenRA.Server
 		Dictionary<int, List<Connection>> inFlightFrames
 			= new Dictionary<int, List<Connection>>();
 
-		TypeDictionary ServerTraits = new TypeDictionary();
+		protected TypeDictionary ServerTraits = new TypeDictionary();
 		public Session lobbyInfo;
 		public bool GameStarted = false;
 		public readonly IPAddress Ip;
@@ -49,12 +49,14 @@ namespace OpenRA.Server
 		volatile bool shutdown = false;
 		public void Shutdown() { shutdown = true; }
 
-		public Server(IPEndPoint endpoint, string[] mods, ServerSettings settings, ModData modData)
+		public Server(IPEndPoint endpoint, string[] mods, ServerSettings settings, ModData modData, bool noListen=false, IEnumerable<ServerTrait> traits=null)
 		{
 			Log.AddChannel("server", "server.log");
 
 			listener = new TcpListener(endpoint);
-			listener.Start();
+			//Dirty hack, but it will crash if there is no server socket
+			if(!noListen)
+				listener.Start();
 			var localEndpoint = (IPEndPoint)listener.LocalEndpoint;
 			Ip = localEndpoint.Address;
 			Port = localEndpoint.Port;
@@ -63,9 +65,13 @@ namespace OpenRA.Server
 			ModData = modData;
 
 			randomSeed = (int)DateTime.Now.ToBinary();
-
-			foreach (var trait in modData.Manifest.ServerTraits)
-				ServerTraits.Add( modData.ObjectCreator.CreateObject<ServerTrait>(trait) );
+			
+			if(traits==null)
+				foreach (var trait in modData.Manifest.ServerTraits)
+					ServerTraits.Add( modData.ObjectCreator.CreateObject<ServerTrait>(trait) );
+			else
+				foreach (var t in traits)
+					ServerTraits.Add( t);
 
 			lobbyInfo = new Session( mods );
 			lobbyInfo.GlobalSettings.RandomSeed = randomSeed;
@@ -326,7 +332,7 @@ namespace OpenRA.Server
 			DispatchOrders(asConn, 0, new ServerOrder("Disconnected", "").Serialize());
 		}
 
-		void InterpretServerOrder(Connection conn, ServerOrder so)
+		protected virtual void InterpretServerOrder(Connection conn, ServerOrder so)
 		{
 			switch (so.Name)
 			{

@@ -13,7 +13,7 @@ using System.IO;
 
 namespace OpenRA.Server
 {
-	class ServerOrder
+	public class ServerOrder
 	{
 		public readonly string Name;
 		public readonly string Data;
