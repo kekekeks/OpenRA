@@ -31,6 +31,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenRA.Renderer.Gl", "OpenR
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenRA.Renderer.SdlCommon", "OpenRA.Renderer.SdlCommon\OpenRA.Renderer.SdlCommon.csproj", "{52FD9F0B-B209-4ED7-8A32-AC8033363263}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenRA.Net", "OpenRA.Net\OpenRA.Net.csproj", "{71D180A6-3CB1-4609-80A5-17A522753AE3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -142,6 +144,14 @@ Global
 		{F9FA4D9F-2302-470A-8A07-6E37F488C124}.Release|Any CPU.Build.0 = Release|Any CPU
 		{F9FA4D9F-2302-470A-8A07-6E37F488C124}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{F9FA4D9F-2302-470A-8A07-6E37F488C124}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+                {71D180A6-3CB1-4609-80A5-17A522753AE3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+                {71D180A6-3CB1-4609-80A5-17A522753AE3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+                {71D180A6-3CB1-4609-80A5-17A522753AE3}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+                {71D180A6-3CB1-4609-80A5-17A522753AE3}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+                {71D180A6-3CB1-4609-80A5-17A522753AE3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+                {71D180A6-3CB1-4609-80A5-17A522753AE3}.Release|Any CPU.Build.0 = Release|Any CPU
+                {71D180A6-3CB1-4609-80A5-17A522753AE3}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+                {71D180A6-3CB1-4609-80A5-17A522753AE3}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(MonoDevelopProperties) = preSolution
 		StartupItem = OpenRA.Game\OpenRA.Game.csproj
